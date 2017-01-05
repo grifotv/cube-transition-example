@@ -40,22 +40,36 @@ class CubeTransition extends React.Component {
     let pageX = width * i;
 
     let translateX = scrollX.interpolate({
-      inputRange: [pageX - width, pageX - width / 2, pageX, pageX + width],
-      outputRange: [width, width/2, 0, -width],
+      inputRange: [pageX - width, pageX, pageX + width],
+      outputRange: [width / 2, 0, -width /2],
       extrapolate: 'clamp',
     });
 
     let rotateY = scrollX.interpolate({
       inputRange: [pageX - width, pageX, pageX + width],
-      outputRange: ['45deg', '0deg', '-45deg'],
+      outputRange: ['60deg', '0deg', '-60deg'],
+      extrapolate: 'clamp',
+    });
+
+    let translateXAfterRotate = scrollX.interpolate({
+      inputRange: [pageX - width, pageX, pageX + width],
+      inputRange: [
+        pageX - width,
+        pageX - width + 0.1,
+        pageX,
+        pageX + width - 0.1,
+        pageX + width,
+      ],
+      outputRange: [width, width / 2.38, 0, -width /2.38, -width],
       extrapolate: 'clamp',
     });
 
     return {
       transform: [
         {perspective: width},
-        {rotateY},
         {translateX},
+        {rotateY},
+        {translateX: translateXAfterRotate},
       ]
     }
   }
@@ -64,7 +78,7 @@ class CubeTransition extends React.Component {
     let { scrollX } = this.state;
     let pageX = width * i;
     let opacity = scrollX.interpolate({
-      inputRange: [pageX - width, pageX, pageX + width],
+      inputRange: [ pageX - width, pageX, pageX + width ],
       outputRange: [0.9, 0, 0.9],
       extrapolate: 'clamp',
     });
