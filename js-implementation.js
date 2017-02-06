@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Dimensions, ScrollView, StyleSheet, Image, View } from 'react-native';
+import { Animated, Dimensions, StyleSheet, Image, View } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 const useNativeDriver = true;
